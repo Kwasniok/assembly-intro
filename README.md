@@ -8,4 +8,4 @@ Each combination of operating system (OS) and CPU architecture (arch) has its ow
 ## List of Subprojects
 | name | OS | CPU arch |
 |------|----|----------|
-| [linux-x86_64](linux-x86_64)| (any) linux | x86_64/amd64 |
+| [linux-x86-64](linux-x86-64)| (any) linux | x86_64/amd64 |
