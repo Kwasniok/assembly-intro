@@ -1,0 +1,13 @@
+## build process
+# object files
+*.o
+# make log files
+**/make.log
+
+## executables
+# bin
+subprojects/*/bin/*
+
+## tools
+# xcode
+xcode/*

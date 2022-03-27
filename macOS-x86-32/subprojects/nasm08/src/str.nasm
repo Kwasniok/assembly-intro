@@ -1,0 +1,65 @@
+section .text
+
+; calculate length of string (eax) via null-termination (return to eax)
+strlen:
+.prolog:
+    push    ebx                     ; store ebx on stack to preserve it
+.begin:
+    mov     ebx, eax                ; store initial position
+.next:
+    cmp     byte [eax], 0           ; check for null character
+    jz      .final                  ; terminate loop if it is a null character
+    inc     eax                     ; go to next character
+    jmp     .next                   ; continue loop
+.final:
+    sub     eax, ebx                ; subtract initial address form current
+                                    ; address and store the result in eax
+.epilog:
+    pop     ebx                     ; restore ebx
+    ret                             ; return (counter part of call)
+
+; print null-terminated string (eax) to stdout
+sprint:
+.prolog:
+    ; store registers
+    push    dword   ebx
+    push    dword   eax
+.begin:
+    mov     ebx, eax
+    call    strlen
+.sys_write:
+    ; perform system call (sys_write)
+    ; c pseudo code declaration:
+    ;     user_ssize_t write(int fd, user_addr_t cbuf, user_size_t nbyte)
+    ; push arguments from right to left
+    sub     esp, 4                  ; align stack (to 8 bytes)
+    push    dword   eax             ; nbyte
+    push    dword   ebx             ; cbuf
+    push    dword 1                 ; fd (stdout)
+    sub     esp, 4                  ; align stack (to 8 bytes)
+    mov     eax, 4                  ; store opcode for sys_write
+    int     0x80                    ; perform system call
+    add     esp, 20                 ; pop stack
+.epilog:
+    ; restore registers
+    pop     eax
+    pop     ebx
+    ret
+
+section .data
+lfnt: db      0x0A, 0x00
+
+section .text
+; print null-terminated string (eax) incl. a line feed to stdout
+; wrapps around sprint
+sprintlf:
+.base:
+    call    sprint                  ; print string
+.prolog:
+    push    dword   eax             ; store registers
+.begin:
+    mov     eax, lfnt               ; set string to null-terminated line feed
+    call    sprint                  ; print line feed
+.epilog:
+    pop     eax                     ; restore registers
+    ret
