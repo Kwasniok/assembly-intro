@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# first argument is the name of the subproject
+subproject_name=$1
+
+# build
+./build $subproject_name
+if [ $? -ne 0 ]; then
+    echo "error: Could not build subproject." >&2
+    exit 1
+fi
+# change directory (subproject)
+cd subprojects/$subproject_name > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "error: Could not access subproject folder." >&2
+    exit 1
+fi
+# print stats
+# size of executable
+if [ -f bin/main ]; then
+    echo "size of executable: $(stat -f "%z" bin/main) bytes"
+else
+    echo "size of executable: ---"
+fi
+# lines of source code
+if [ -d src ]; then
+    cd src
+    echo "lines of source code:"
+    wc -l *.asm *.nasm 2> /dev/null
+fi

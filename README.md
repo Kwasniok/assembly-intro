@@ -8,3 +8,4 @@ Each combination of operating system (OS) and CPU architecture (arch) has its ow
 ## List of Subprojects
 | name | OS | CPU arch |
 |------|----|----------|
+|[macOS-x86-32](macOS-x86-32)| macOS (10.7) | x86-32/i386/IA-32 |
