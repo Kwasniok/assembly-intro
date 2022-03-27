@@ -1,0 +1,8 @@
+# build and binaries
+bin/
+
+# object files
+*.o
+
+# python
+.venv/
