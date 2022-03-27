@@ -4,5 +4,8 @@ bin/
 # object files
 *.o
 
+# gdb
+.gdb_history
+
 # python
 .venv/
