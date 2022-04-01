@@ -7,3 +7,6 @@ bin/
 # gdb
 .gdb_history
 
+# playground
+src/playground.s
+
