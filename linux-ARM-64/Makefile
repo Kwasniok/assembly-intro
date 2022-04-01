@@ -4,19 +4,29 @@
 # (missing rule instead of failing wrong rule)
 MAKEFLAGS += --no-builtin-rules
 
+BIN=bin
+SRC=src
+
 LD=ld
 LD_FLAGS= -g
 AS=as
 AS_FLAGS= -ggdb
 
+# default target makes all targets
+.DEFAULT_GOAL=all
 .PHONY: all
 all: first
 
-.INTERMEDIATE: first.o
+pure_s_targets=first
+pure_s_sources=$(addprefix $(SRC)/, $(addsuffix .s, $(pure_s_targets)))
+pure_s_objects=$(addprefix $(BIN)/, $(addsuffix .o, $(pure_s_targets)))
+pure_s_bins   =$(addprefix $(BIN)/, $(pure_s_targets))
 
-first: first.o
-	$(LD) -o first $(LD_FLAGS) first.o
+.INTERMEDIATE: $(pure_s_objects)
 
-first.o: first.s
-	$(AS) -o first.o $(AS_FLAGS) first.s
+$(pure_s_targets): %: $(BIN)/%
+$(pure_s_bins): $(BIN)/%: $(BIN)/%.o
+	$(LD) -o $@ $(LD_FLAGS) $(BIN)/$*.o
+$(pure_s_objects): $(BIN)/%.o: $(SRC)/%.s
+	$(AS) -o $@ $(AS_FLAGS) $(SRC)/$*.s
 

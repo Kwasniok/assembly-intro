@@ -9,6 +9,10 @@ Hardware that supports it includes:
 |--------------|----------------|---------------------------|
 | Armv8-A      | ARM Cortex-A72 | Raspberry Pi 4B (BCM2711) |
 
+## Organization
+Source code is stored in `src` and executables are build in `bin`.
+Run `make` to build all executables or `make <target>` where `<target>` is the name of the executable to build one executable.
+
 ## Dependencies
 - CPU supporting the A64 instruction set
 - linux kernel v5.15+
