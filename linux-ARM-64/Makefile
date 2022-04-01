@@ -16,6 +16,8 @@ CC_FLAGS= -ggdb
 
 pure_s_targets=first \
 			   playground \
+			   syscall_exit \
+			   syscall_write \
 
 pure_c_targets=c_minimal \
 			   c_printf \
