@@ -18,6 +18,7 @@ pure_s_targets=first \
 			   playground \
 
 pure_c_targets=c_minimal \
+			   c_printf \
 
 libc_s_targets=libc_puts \
 
