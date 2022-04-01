@@ -12,7 +12,9 @@ LD_FLAGS= -g
 AS=as
 AS_FLAGS= -ggdb
 
-pure_s_targets=first playground
+pure_s_targets=first \
+			   playground \
+
 pure_s_sources=$(addprefix $(SRC)/, $(addsuffix .s, $(pure_s_targets)))
 pure_s_objects=$(addprefix $(BIN)/, $(addsuffix .o, $(pure_s_targets)))
 pure_s_bins   =$(addprefix $(BIN)/, $(pure_s_targets))
