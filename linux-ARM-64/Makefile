@@ -21,6 +21,7 @@ pure_c_targets=c_minimal \
 			   c_printf \
 
 libc_s_targets=libc_puts \
+			   libc_printf \
 
 pure_s_sources=$(addprefix $(SRC)/, $(addsuffix .s, $(pure_s_targets)))
 pure_s_objects=$(addprefix $(BIN)/, $(addsuffix .o, $(pure_s_targets)))
