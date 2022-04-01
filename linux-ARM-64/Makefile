@@ -12,17 +12,16 @@ LD_FLAGS= -g
 AS=as
 AS_FLAGS= -ggdb
 
-# default target makes all targets
-.DEFAULT_GOAL=all
-.PHONY: all
-all: first
-
 pure_s_targets=first
 pure_s_sources=$(addprefix $(SRC)/, $(addsuffix .s, $(pure_s_targets)))
 pure_s_objects=$(addprefix $(BIN)/, $(addsuffix .o, $(pure_s_targets)))
 pure_s_bins   =$(addprefix $(BIN)/, $(pure_s_targets))
-
 .INTERMEDIATE: $(pure_s_objects)
+
+# default target makes all targets
+.DEFAULT_GOAL=all
+.PHONY: all
+all: $(pure_s_targets)
 
 $(pure_s_targets): %: $(BIN)/%
 $(pure_s_bins): $(BIN)/%: $(BIN)/%.o
