@@ -1,0 +1,12 @@
+# build and binaries
+bin/
+
+# object files
+*.o
+
+# gdb
+.gdb_history
+
+# playground
+src/playground.s
+
